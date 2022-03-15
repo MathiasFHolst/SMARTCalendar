@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <title>Test Project</title>
+    <link rel="stylesheet" href="calendar.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.10.2/main.js"></script>
+    <script>
+        /*
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+                initialView: 'resourceTimelineMonth',
+                aspectRatio: 2,
+                resourceAreaHeaderContent: 'Bomlifte',
+                resourceAreaColumns: [
+                    {
+                        group: true,
+                        field: 'type',
+                        headerContent: 'Type'
+                    },
+                    {
+                        field: 'title',
+                        headerContent: 'Navn'
+                    }
+                ],
+                headerToolbar: {
+                    left: 'today prev,next',
+                    center: 'title',
+                    right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+                },
+                resources: [
+                    { id: 'a', type: 'EL-Bomlift', title: '10m BOM-022' },
+                    { id: 'b', type: 'EL-Bomlift', title: '10m BOM-025' },
+                    { id: 'test', type: 'Diesel-Bomlift', title: '15,7m BOM-031' },
+                ],
+                events: [
+                    {
+                        id: '1a',
+                        resourceId: 'a',
+                        title: 'Inventio.it',
+                        color: 'blue',
+                        start: '2022-03-01',
+                        end: '2022-03-11',
+                    },
+                    {
+                        id: '2a',
+                        resourceId: 'b',
+                        title: 'Brunsgaard',
+                        color: 'orange',
+                        start: '2022-03-10',
+                        end: '2022-03-15',
+                    },
+                    {
+                        id: '3a',
+                        resourceId: 'test',
+                        title: 'Inventio.it',
+                        color: 'blue',
+                        start: '2022-03-04',
+                        end: '2022-03-08'
+                    }
+                ]
+            });
+            calendar.on('dateClick', function (info) {
+                console.log('clicked on: ' + info.dateStr);
+            })
+            calendar.setOption('locale', 'dk')
+            
+            calendar.batchRendering(function () {
+                //calendar.addEvent({ title: 'Første Lift', start: '2022-03-07', end: '2022-03-09', color: 'blue' });
+            })
+            
+            calendar.render();
+        });
+        */
+    </script>
+</head>
+
+<body>
+    
+    <div class="customCalendar"></div>
+    <!-- The flexible grid (content)
+            <div class="row">
+                <div class="groups-header">
+                <h1>Groups</h1>
+            </div>
+            <div class="resource-header">
+                <h1>Resources</h1>
+            </div>
+            <div class="main">
+                <ul class="weekdays" id="weekdays">
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                    <li class="weekdays-grid-item"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row2">
+            <div class="groups">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, laborum illo itaque praesentium
+                soluta distinctio quo blanditiis assumenda necessitatibus consequatur odit autem aspernatur totam maxime
+                eos, labore ea in consequuntur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit culpa in
+                repellendus deserunt velit, rem minus itaque illo corporis nisi nihil quis reiciendis voluptatibus
+                cupiditate, optio inventore, recusandae qui voluptatem! Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Tempora placeat impedit blanditiis quidem assumenda natus perspiciatis, eos molestias
+                incidunt, ab magnam exercitationem molestiae quos iusto eligendi rerum atque facere debitis! Lorem ipsum
+                dolor sit amet, consectetur adipisicing elit. Exercitationem at accusantium, facilis, itaque quo culpa
+                doloribus aspernatur amet adipisci ducimus accusamus ea minus? Eum in dolore sed aspernatur sint
+                adipisci.
+            </div>
+            <div class="resources">
+            </div>
+            <div class="scheduler">
+                <ul class="scheduler-grid">
+                    <li class="scheduler-grid-item" draggable="true">1</li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                </ul>
+                <ul class="scheduler-grid">
+                    <li class="scheduler-grid-item">1</li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                </ul>
+                <ul class="scheduler-grid">
+                    <li class="scheduler-grid-item">1</li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                    <li class="scheduler-grid-item"></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+-->
+    <script src="calendar.js"></script>
+
+
+    <!--
+    <div id="calendar"></div>
+
+        <div class="chartBox" style="height: auto">
+                <canvas id="myChart"></canvas>
+            </div>
+            <script>
+                var rentedTimeInDays;
+                function getDaysInMonth(year, month) {
+                    return new Date(year, month, 0).getDate();
+                }
+
+        //console.log(getDaysInMonth(2022, 02))
+        
+        const ctx = document.getElementById('myChart');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Udlejet',
+                    data: [],
+                    backgroundColor: 'blue',
+                },
+                {
+                    label: 'Ledig',
+                    data: [],
+                    backgroundColor: 'black',
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stacked: true
+                    },
+                    x: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+        var test1 = getTimeRentedInDays('Første Lift', '2022-02-07', '2022-02-14');
+        var test2 = getTimeRentedInDays('Anden Lift', '2022-02-01', '2022-02-23');
+        var test3 = getTimeRentedInDays('Tredje Lift', '2022-02-02', '2022-02-16');
+        function getTimeRentedInDays(label, startDate, endDate) {
+
+            var alpha = startDate.split("-");
+            var beta = endDate.split("-");
+
+            if (alpha[0] == beta[0] && alpha[1] == beta[1]) {
+                var charlie = getDaysInMonth(alpha[0], alpha[1]);
+            } else {
+                charlie = 365;
+            }
+            var start = new Date(startDate).getTime() / 1000;
+            var end = new Date(endDate).getTime() / 1000;
+            rentedTimeInDays = (end - start) / 86400;
+
+            myChart.data.labels.push(label);
+            myChart.data.datasets[0].data.push(rentedTimeInDays);
+            rentedTimeInDays = charlie - rentedTimeInDays;
+            myChart.data.datasets[1].data.push(rentedTimeInDays);
+            myChart.update();
+
+            return rentedTimeInDays;
+        }
+    </script>
+-->
+</body>
+
+</html>

@@ -1,9 +1,10 @@
 // Schedule of events in the calendar boxes made with fx flexbox??? or just grids
 // Create function to generate tr, th and td's for each resource in table
 // Create resources on the left side + resource groups containing customer decided resources inside the group
-var calendarDiv = document.getElementsByClassName("customCalendar")[0];
+// Elements need to be created using javascript with .appendChild & .createElement
+var calendarHeader = document.getElementsByClassName("customCalendar")[0];
 
-calendarDiv.innerHTML = `
+calendarHeader.innerHTML = `
   <div class="month">
       <ul>
           <li class="prev" onclick="prevWeek()">&#10094;</li>
@@ -11,9 +12,18 @@ calendarDiv.innerHTML = `
           <li>Maj<br><span style="font-size:18px">2022</span></li>
       </ul>
   </div>
-  <table>
-    <thead>
-      <tr>
+  `;
+  var calendarTable = document.createElement("table");
+  calendarHeader.appendChild(calendarTable);
+  var calendarTableHead = document.createElement("thead");
+  calendarTable.appendChild(calendarTableHead);
+  var calendarTableBody = document.createElement("tbody");
+  calendarTable.appendChild(calendarTableBody);
+  createScheduler();
+
+function createScheduler() {
+  calendarTableHead.innerHTML = `
+    <tr>
           <th class="resources">Resources</th>
           <th colspan=7>
               <ul class="weekdays" id="weekdays">
@@ -27,39 +37,28 @@ calendarDiv.innerHTML = `
               </ul>
           </th>
       </tr>
-    </thead>
-    <tbody>
+      `;
+      /* Table head with weekdays and resource header created */
+  for (let index = 0; index < 10; index++) {
+    calendarTableBody.innerHTML += `
       <tr class="resource-rows">
-          <th class="resources">Maria Anders</th>
-          <th class="resources" ondblclick="myFunction(this)">test1</th>
-          <th class="resources" ondblclick="myFunction(this)">test2</th>
-          <th class="resources" ondblclick="myFunction(this)">test3</th>
-          <th class="resources" ondblclick="myFunction(this)">test4</th>
-          <th class="resources" ondblclick="myFunction(this)">test5</th>
-          <th class="resources" ondblclick="myFunction(this)">test6</th>
-          <th class="resources" ondblclick="myFunction(this)">test7</th>
-      </tr>
-      <tr class="resource-rows">
-          <th class="resources">Francisco Chang</th>
-          <th colspan=7>
+          <th class="resources">Francisco Chang${index}</th>
+          <th>
               <ul class="scheduler-grid">
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item1"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item2"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item3"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item4"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item5"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item6"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this.id)" id="item7"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item1"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item2"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item3"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item4"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item5"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item6"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item7">&zwj;</li>
               </ul>
           </th>
       </tr>
-      <tr class="resource-rows">
-          <th class="resources">Roland Mendel</th>
-          <td onclick="console.log('test')"></td>
-      </tr>
-    </tbody>
-  </table>
-`;
+    `;
+  }
+  /* 10 rows inserted into tbody for testing purposes */
+}
 
 var monthNames = [];
 var weekDaysArray = getWeekDays(navigator.language, Date.now());
@@ -70,19 +69,21 @@ var monthNamesArray = getMonthNames(navigator.language);
 
 console.table(monthNames);
 
-
 // Functions used to get week days names matching to the users browser language using the (locale) parameter with navigator.language
 var dateOffset = 0;
 var tempDate = new Date();
 
 function addEvent(test) {
-  alert("Event added on " + test);
+  let companyName = prompt("Please enter company name", "Inventio.it");
+  if (companyName != null) {
+    test.innerHTML = companyName;
+    test.style.backgroundColor = "lightblue";
+  }
 }
 
 function myFunction(arg) {
   console.log(arg);
-  arg.style.color = "red";
-  arg.innerHTML = "Inventio.it";
+  arg.style.backgroundColor = "red";
 }
 
 function prevWeek() {
@@ -93,6 +94,26 @@ function prevWeek() {
     tempDate.getDate() + dateOffset
   );
   getWeekDays(navigator.language, tempDate);
+  calendarTableBody.innerHTML = ``;
+  for (let index = 0; index < 10; index++) {
+    calendarTableBody.innerHTML += `
+      <tr class="resource-rows">
+          <th class="resources">Francisco Chang${index}</th>
+          <th>
+              <ul class="scheduler-grid">
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item1"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item2"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item3"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item4"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item5"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item6"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item7">&zwj;</li>
+              </ul>
+          </th>
+      </tr>
+    `
+    
+  }
   return tempDate;
 }
 
@@ -104,6 +125,25 @@ function nextWeek() {
     tempDate.getDate() + dateOffset
   );
   getWeekDays(navigator.language, tempDate);
+  calendarTableBody.innerHTML = ``;
+  for (let index = 0; index < 10; index++) {
+    calendarTableBody.innerHTML += `
+      <tr class="resource-rows">
+          <th class="resources">Francisco Chang${index}</th>
+          <th>
+              <ul class="scheduler-grid">
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item1"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item2"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item3"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item4"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item5"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item6"></li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item7">&zwj;</li>
+              </ul>
+          </th>
+      </tr>
+    `
+  }
   return tempDate;
 }
 

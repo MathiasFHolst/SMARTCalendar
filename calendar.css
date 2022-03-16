@@ -134,7 +134,7 @@ body {font-family: "Open Sans", sans-serif;}
 
 .resources {
   /*flex: 15%;*/
-  border-right: 1px solid;
+  border-right: 3px solid;
 }
 
 .scheduler {

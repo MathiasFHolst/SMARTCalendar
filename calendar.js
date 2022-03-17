@@ -27,13 +27,13 @@ function createScheduler() {
           <th class="resources">Resources</th>
           <th colspan=7>
               <ul class="weekdays" id="weekdays">
-                  <li class="weekdays-grid-item">1</li>
-                  <li class="weekdays-grid-item">2</li>
-                  <li class="weekdays-grid-item">3</li>
-                  <li class="weekdays-grid-item">4</li>
-                  <li class="weekdays-grid-item">5</li>
-                  <li class="weekdays-grid-item">6</li>
-                  <li class="weekdays-grid-item">7</li>
+                  <li class="weekdays-grid-item1">1</li>
+                  <li class="weekdays-grid-item2">2</li>
+                  <li class="weekdays-grid-item3">3</li>
+                  <li class="weekdays-grid-item4">4</li>
+                  <li class="weekdays-grid-item5">5</li>
+                  <li class="weekdays-grid-item6">6</li>
+                  <li class="weekdays-grid-item7">7</li>
               </ul>
           </th>
       </tr>
@@ -45,13 +45,13 @@ function createScheduler() {
           <th class="resources">Francisco Chang${index}</th>
           <th>
               <ul class="scheduler-grid">
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item1"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item2"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item3"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item4"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item5"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item6"></li>
-                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" id="item7">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
+                  <li class="scheduler-grid-item" ondblclick="addEvent(this)" draggable="true">&zwj;</li>
               </ul>
           </th>
       </tr>
@@ -59,7 +59,7 @@ function createScheduler() {
   }
   /* 10 rows inserted into tbody for testing purposes */
 }
-
+var savedRents = []
 var monthNames = [];
 var weekDaysArray = getWeekDays(navigator.language, Date.now());
 //console.table(weekDaysArray);
@@ -72,12 +72,23 @@ console.table(monthNames);
 // Functions used to get week days names matching to the users browser language using the (locale) parameter with navigator.language
 var dateOffset = 0;
 var tempDate = new Date();
+var beta = 1;
 
 function addEvent(test) {
+  if(beta > 7){
+    beta = 1;
+  }
   let companyName = prompt("Please enter company name", "Inventio.it");
   if (companyName != null) {
     test.innerHTML = companyName;
-    test.style.backgroundColor = "lightblue";
+    //test.style.backgroundColor = "lightblue";
+    /*while(document.getElementsByClassName(`weekdays-grid-item${beta}`) != this.id)
+    {
+      beta += 1;
+    }*/
+    var alpha = document.getElementsByClassName(`weekdays-grid-item${beta}`)[0].innerHTML;
+    console.log(alpha)
+    beta += 1;
   }
 }
 
@@ -234,3 +245,60 @@ function getMonthNames(locale) {
     }
   }
 }
+// Slab City //
+
+// https://webdevtrick.com/html-drag-and-drop-list/
+
+var remove = document.querySelector('.scheduler-grid-item');
+ 
+function dragStart(e) {
+  this.style.opacity = '0.4';
+  dragSrcEl = this;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+};
+ 
+function dragEnter(e) {
+  this.classList.add('over');
+}
+ 
+function dragLeave(e) {
+  e.stopPropagation();
+  this.classList.remove('over');
+}
+ 
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+ 
+function dragDrop(e) {
+  if (dragSrcEl != this) {
+    dragSrcEl.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+  }
+  return false;
+}
+ 
+function dragEnd(e) {
+var listItens = document.querySelectorAll('.scheduler-grid-item');
+  [].forEach.call(listItens, function(item) {
+    item.classList.remove('over');
+  });
+  this.style.opacity = '1';
+}
+ 
+function addEventsDragAndDrop(el) {
+  el.addEventListener('dragstart', dragStart, false);
+  el.addEventListener('dragenter', dragEnter, false);
+  el.addEventListener('dragover', dragOver, false);
+  el.addEventListener('dragleave', dragLeave, false);
+  el.addEventListener('drop', dragDrop, false);
+  el.addEventListener('dragend', dragEnd, false);
+}
+ 
+var listItens = document.querySelectorAll('.scheduler-grid-item');
+[].forEach.call(listItens, function(item) {
+  addEventsDragAndDrop(item);
+});

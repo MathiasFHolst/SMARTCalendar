@@ -37,8 +37,7 @@ body {font-family: "Open Sans", sans-serif;}
   padding-top: 10px;
 }
 
-.month .prev:hover,
-.month .next:hover {
+.month .prev:hover,.month .next:hover {
   transform: scale(1.5) perspective(1px);
   cursor: pointer;
 }
@@ -75,15 +74,9 @@ body {font-family: "Open Sans", sans-serif;}
 .scheduler-grid-item {
   text-align: center;
   padding: 15px 0;
-  /*height: 5.5vh;
-  line-height: 5.5vh;*/
-}
-
-.scheduler-grid-item:nth-child(even) {
-  border-style: none solid none solid;
+  border-style: ridge;
   border-width: 1px;
 }
-
 .resource-rows:hover {background-color: rgb(0, 206, 209);}
 
 /* ------------------------------------------------*/

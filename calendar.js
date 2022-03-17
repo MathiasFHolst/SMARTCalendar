@@ -13,13 +13,13 @@ calendarHeader.innerHTML = `
       </ul>
   </div>
   `;
-  var calendarTable = document.createElement("table");
-  calendarHeader.appendChild(calendarTable);
-  var calendarTableHead = document.createElement("thead");
-  calendarTable.appendChild(calendarTableHead);
-  var calendarTableBody = document.createElement("tbody");
-  calendarTable.appendChild(calendarTableBody);
-  createScheduler();
+var calendarTable = document.createElement("table");
+calendarHeader.appendChild(calendarTable);
+var calendarTableHead = document.createElement("thead");
+calendarTable.appendChild(calendarTableHead);
+var calendarTableBody = document.createElement("tbody");
+calendarTable.appendChild(calendarTableBody);
+createScheduler();
 
 function createScheduler() {
   calendarTableHead.innerHTML = `
@@ -38,7 +38,7 @@ function createScheduler() {
           </th>
       </tr>
       `;
-      /* Table head with weekdays and resource header created */
+  /* Table head with weekdays and resource header created */
   for (let index = 0; index < 10; index++) {
     calendarTableBody.innerHTML += `
       <tr class="resource-rows">
@@ -111,8 +111,7 @@ function prevWeek() {
               </ul>
           </th>
       </tr>
-    `
-    
+    `;
   }
   return tempDate;
 }
@@ -142,7 +141,7 @@ function nextWeek() {
               </ul>
           </th>
       </tr>
-    `
+    `;
   }
   return tempDate;
 }

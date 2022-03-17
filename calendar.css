@@ -89,58 +89,10 @@ body {font-family: "Open Sans", sans-serif;}
 /* ------------------------------------------------*/
 /* BELOW IS BASE FLEXBOX 3 COLUMNS 2 ROWS */
 
-/* Column container */
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.row2 {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-/* Create two unequal columns that sits next to each other */
-.groups-header {
-  flex: 15%;
-  border-style: solid;
-  background-color: #f1f1f1;
-  text-align: center;
-  padding: 10px;
-}
-
-/* Sidebar/left column */
-.resource-header {
-  flex: 15%;
-  background-color: #f1f1f1;
-  border-style: solid;
-  text-align: center;
-  padding: 10px;
-}
-
-/* Main column */
-.main {
-  flex: 70%;
-  background-color: white;
-  border-style: solid;
-}
-
-.groups {
-  flex: 15%;
-  border-style: solid;
-}
-
 .resources {
-  /*flex: 15%;*/
   border-right: 3px solid;
 }
 
-.scheduler {
-  flex: 70%;
-  border-style: solid;
-}
 
 /* ------------------------------------------------*/
 /* GENERAL TAGS STYLING */
